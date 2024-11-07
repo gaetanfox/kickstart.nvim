@@ -17,7 +17,15 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 --
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
+vim.keymap.set('n', '<leader>tt', ':ToggleTerm<cr>', { desc = '[T]oggle [T]erminal' })
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+vim.keymap.set('t', '<esc>', [[<C-\><C-n>]])
+vim.keymap.set('t', 'jk', [[<C-\><C-n>]])
+vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]])
+vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]])
+vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]])
+vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]])
+vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]])
 
 -- Remap jj or jk to escape insert mode
 vim.api.nvim_set_keymap('i', 'jj', '<Esc>', { noremap = true, silent = true })

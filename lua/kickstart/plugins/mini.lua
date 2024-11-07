@@ -25,8 +25,14 @@ local header_art =
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣤⣴⣶⣿⣿⣯⠀⠀⠀⠀⠀⠀⠘⠛⠋⠈⠋⠙⣿⣷⣦⣤⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ]]
 
-local footer_art = [[
-]]
+-- local footer_art = [[
+--             _         _____
+--            | |    ___|  ___|____  __
+--            | |   / _ \ |_ / _ \ \/ /
+--            | |__|  __/  _| (_) >  <
+--            |_____\___|_|  \___/_/\_\
+--
+-- ]]
 return { -- Collection of various small independent pluins/modules
   'echasnovski/mini.nvim',
   config = function()
@@ -78,14 +84,14 @@ return { -- Collection of various small independent pluins/modules
     local starter = require 'mini.starter'
     starter.setup {
       items = {
-        starter.sections.recent_files(3, true),
+        starter.sections.recent_files(5, true),
       },
       content_hooks = {
         starter.gen_hook.adding_bullet(),
         starter.gen_hook.aligning('center', 'center'),
       },
       header = header_art,
-      footer = footer_art,
+      -- footer = footer_art,
     }
 
     require('mini.hipatterns').setup {}
