@@ -28,6 +28,12 @@ open error message with `<leader>E`
 - [ ] ai autofill (cursor/copilot) (not sure if necessary atm) 
 - [ ] buffer tab? (currently against this atm)
 
+- [x] good keymapping for md previewer (or complete plugin replacement)
+- [x] make background same color as tmux and terminal background colors
+- [x] sometype of database management plugin (DADBOD)
+- [x] mardown lsp stuff / helpful plugins???
+- [x] combine fugitive and gitsigns into one file?
+- [x] mini.symbols
 
 ###  Removed Plugins 
 - flash.nvim    -> i like leap.nvim mo better
