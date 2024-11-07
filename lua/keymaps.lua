@@ -39,6 +39,12 @@ vim.keymap.set('n', '<leader>wh', ':split<cr>', { desc = '[W]indow [H]orizontal 
 -- Window Save & Quit
 vim.keymap.set('n', '<leader>wq', ':q<cr>', { desc = '[W]indow [Q]uit' })
 vim.keymap.set('n', '<leader>ww', ':w<cr>', { desc = '[W]indow [W]rite' })
+vim.keymap.set('n', '<leader>wc', ':bd<cr>', { desc = '[W]indow [C]lose' })
+vim.keymap.set('n', '<leader>wn', ':bnext<cr>', { desc = '[W]indow [N]ext' })
+vim.keymap.set('n', '<leader>wp', ':bprev<cr>', { desc = '[W]indow [P]rev' })
+
+-- toggle undo tree
+vim.keymap.set('n', '<leader>tu', ':UndotreeToggle<cr>', { desc = '[T]oggle [U]ndotree' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
