@@ -170,7 +170,9 @@ return { -- LSP Configuration & Plugins
       gopls = {},
       pyright = {
         settings = {
-          diagnostics = { disable = true },
+          pylsp = {
+            diagnostics = { disable = true },
+          },
         },
       },
       rust_analyzer = {},
