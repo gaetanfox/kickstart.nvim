@@ -12,8 +12,8 @@ return {
     opts = {
       workspaces = {
         {
-          name = 'Work',
-          path = '~/Documents/Obsidian-Vault',
+          name = 'main',
+          path = '~/Documents/main',
         },
       },
       ui = {

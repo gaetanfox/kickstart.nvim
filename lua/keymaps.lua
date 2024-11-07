@@ -66,5 +66,5 @@ local function remove_python_comments()
 end
 
 -- Map the function to a key combination in normal mode
-vim.api.nvim_set_keymap('n', '<leader>fs', '<cmd>lua remove_python_comments()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>cs', '<cmd>lua remove_python_comments()<CR>', { noremap = true, silent = true })
 -- vim: ts=2 sts=2 sw=2 et
