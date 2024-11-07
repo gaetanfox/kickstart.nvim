@@ -24,7 +24,7 @@ require 'lazy-plugins'
 -- }
 
 -- vim.cmd.colorscheme 'tokyonight-night'
-vim.cmd.colorscheme 'catppuccin-macchiato'
+--vim.cmd.colorscheme 'catppuccin-macchiato'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

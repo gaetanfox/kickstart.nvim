@@ -1,38 +1,34 @@
 --  i want #1a1b26 instead of #1e1e2f
-return {
-  'catppuccin/nvim',
-  name = 'catppuccin',
-  priority = 1000,
-  opts = {
-    background = {
-      light = 'latte',
-      dark = 'mocha',
-    },
-    transparent_background = true,
-    color_overrides = {
-      mocha = {
-        Mantle = '#1e1e2e',
-      },
-    },
-  },
-}
 -- return {
---   'tokyonight.nvim',
---   enabled = false,
---   lazy = false,
+--   'catppuccin/nvim',
+--   name = 'catppuccin',
 --   priority = 1000,
 --   opts = {
---     plugins = { markdown = true },
---     transparent = true,
---     styles = {
---       sidebars = 'transparent',
---       floats = 'transparent',
+--     background = {
+--       light = 'latte',
+--       dark = 'mocha',
+--     },
+--     transparent_background = true,
+--     color_overrides = {
+--       mocha = {
+--         Mantle = '#1e1e2e',
+--       },
 --     },
 --   },
---   config = function(_, opts)
---     require('tokyonight').setup(opts)
---   end,
 -- }
+return {
+  'folke/tokyonight.nvim',
+  name = 'tokyonight-night',
+  priority = 1000,
+  -- opts = ...,
+  init = function()
+    require('tokyonight').setup {
+      transparent_mode = true,
+    }
+    vim.o.background = 'dark'
+    vim.cmd [[ colorscheme tokyonight-night ]]
+  end,
+}
 -- future options
 --
 -- monokai-charcoal
