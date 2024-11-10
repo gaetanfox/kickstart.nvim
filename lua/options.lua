@@ -1,8 +1,5 @@
 -- [[ Setting options ]]
 -- vim.g.tundra_biome = 'artic'
-vim.opt.foldmethod="indent"   
-vim.opt.foldnestmax=10
-vim.opt.foldlevel=2
 -- FOR OBSIDIAN.NVIM
 vim.opt.conceallevel = 1
 
@@ -79,13 +76,13 @@ vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {f
 -- Hide deprecation warnings
 vim.g.deprecation_warnings = false
 
--- if vim.fn.has 'nvim-0.10' == 1 then
---   vim.opt.smoothscroll = true
---   vim.opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
---   vim.opt.foldmethod = 'expr'
---   vim.opt.foldtext = ''
--- else
---   vim.opt.foldmethod = 'indent'
---   vim.opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
--- end
+if vim.fn.has 'nvim-0.10' == 1 then
+  vim.opt.smoothscroll = true
+  vim.opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
+  vim.opt.foldmethod = 'expr'
+  vim.opt.foldtext = ''
+else
+  vim.opt.foldmethod = 'indent'
+  vim.opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
+end
 -- vim: ts=2 sts=2 sw=2 et
