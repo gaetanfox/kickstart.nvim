@@ -28,6 +28,13 @@ vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]])
 vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]])
 vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]])
 
+-- obsidian
+vim.keymap.set('n', '<leader>on', ':ObsidianNew <cr>', { desc = '[O]bsidian [N]ew Note' })
+vim.keymap.set('n', '<leader>oo', ':ObsidianOpen <cr>', { desc = '[O]bsidian [O]pen Note' })
+vim.keymap.set('n', '<leader>os', ':ObsidianSearch <cr>', { desc = '[O]bsidian [S]earch Note' })
+-- vim.keymap.set('n', '<leader>ot', ':ObsidianToday <cr>', { desc = '[O]bsidian [T]oday Note' })
+vim.keymap.set('n', '<leader>or', ':ObsidianRename <cr>', { desc = '[O]bsidian [R]ename Note' })
+
 -- Remap jj or jk to escape insert mode
 vim.api.nvim_set_keymap('i', 'jj', '<Esc>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', 'jk', '<Esc>', { noremap = true, silent = true })
