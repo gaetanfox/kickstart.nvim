@@ -168,16 +168,16 @@ return { -- LSP Configuration & Plugins
     local servers = {
       clangd = {},
       gopls = {
-        settings = {
-          gopls = {
-            experimentalPostfixCompletions = true,
-            analyses = {
-              unusedparams = true,
-              shadow = true,
-            },
-            staticcheck = true,
-          },
-        },
+        -- settings = {
+        --   gopls = {
+        --     experimentalPostfixCompletions = true,
+        --     analyses = {
+        --       unusedparams = true,
+        --       shadow = true,
+        --     },
+        --     staticcheck = true,
+        --   },
+        -- },
       },
       pyright = {
         settings = {
