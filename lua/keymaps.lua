@@ -11,7 +11,7 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagn
 vim.keymap.set('n', '<leader>E', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
-vim.keymap.set('n', '<leader>e', '<CMD>Oil<CR>', { noremap = true, silent = true, desc = 'MiniFile [E]xplorer' })
+vim.keymap.set('n', '<leader>e', '<CMD>Oil<CR>', { noremap = true, silent = true, desc = 'Oil [E]xplorer' })
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -79,7 +79,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- Define a Lua function to remove comments
-local function remove_python_comments()
+function remove_python_comments()
   -- Remove single-line comments
   vim.cmd [[%s/^\s*#.*//g]]
   -- Remove multi-line comments with '''
@@ -89,7 +89,7 @@ local function remove_python_comments()
 end
 
 -- Map the function to a key combination in normal mode
--- vim.api.nvim_set_keymap('n', '<leader>cs', '<cmd>lua remove_python_comments()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>cs', '<cmd>lua remove_python_comments()<CR>', { noremap = true, silent = true })
 -- vim: ts=2 sts=2 sw=2 et
 
 -- use gh to move to the beginning of the line in normal mode
@@ -107,26 +107,6 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = '[P]Move line up in visual
 
 -- When you do joins with J it will keep your cursor at the beginning instead of at the end
 vim.keymap.set('n', 'J', 'mzJ`z')
-
--- Replaces the word I'm currently on, opens a terminal so that I start typing the new word
--- It replaces the word globally across the entire file
-vim.keymap.set('n', '<leader>su', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "[P]Replace word I'm currently on GLOBALLY" })
-
--- Replaces the current word with the same word in uppercase, globally
-vim.keymap.set(
-  'n',
-  '<leader>sU',
-  [[:%s/\<<C-r><C-w>\>/<C-r>=toupper(expand('<cword>'))<CR>/gI<Left><Left><Left>]],
-  { desc = "[P]GLOBALLY replace word I'm on with UPPERCASE" }
-)
-
--- Replaces the current word with the same word in lowercase, globally
-vim.keymap.set(
-  'n',
-  '<leader>sL',
-  [[:%s/\<<C-r><C-w>\>/<C-r>=tolower(expand('<cword>'))<CR>/gI<Left><Left><Left>]],
-  { desc = "[P]GLOBALLY replace word I'm on with lowercase" }
-)
 
 -- If this is a .go file, execute it in a tmux pane on the right
 -- Using a tmux pane allows me to easily select text

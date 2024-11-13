@@ -47,8 +47,6 @@ return { -- Collection of various small independent pluins/modules
     --  - ci'  - [C]hange [I]nside [']quote
     require('mini.ai').setup { n_lines = 500 }
 
-    -- TODO: test new surround plugin
-
     -- Add/delete/replace surroundings (brackets, quotes, etc.)
 
     -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
@@ -70,7 +68,7 @@ return { -- Collection of various small independent pluins/modules
         preview = true,
       },
     }
-    -- vim.keymap.set('n', '<leader>e', ':lua MiniFiles.open()<CR>', { noremap = true, silent = true, desc = 'MiniFile [E]xplorer' })
+    vim.keymap.set('n', '<leader>E', ':lua MiniFiles.open()<CR>', { noremap = true, silent = true, desc = 'MiniFile [E]xplorer' })
 
     -- mini.jump
     -- require('mini.jump').setup {}
