@@ -11,7 +11,7 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagn
 vim.keymap.set('n', '<leader>E', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
-vim.keymap.set('n', '<leader>e', '<CMD>Oil<CR>', { noremap = true, silent = true, desc = 'Oil [E]xplorer' })
+vim.keymap.set('n', '<leader>e', '<CMD>Oil --float<CR>', { noremap = true, silent = true, desc = 'Oil [E]xplorer' })
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -28,6 +28,12 @@ vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]])
 vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]])
 vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]])
 vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]])
+
+-- split resizing
+vim.keymap.set('n', '<M-Right>', '<c-w>10<', { desc = '[W]indow increase right' })
+vim.keymap.set('n', '<M-Left>', '<c-w>10>', { desc = '[W]indow increase left' })
+vim.keymap.set('n', '<M-Down>', '<c-w>5-', { desc = '[W]indow decrease height' })
+vim.keymap.set('n', '<M-Up>', '<c-w>5+', { desc = '[W]indow increase height' })
 
 -- obsidian
 vim.keymap.set('n', '<leader>on', ':ObsidianNew <cr>', { desc = '[O]bsidian [N]ew Note' })
