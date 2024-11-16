@@ -6,7 +6,7 @@ return { -- LSP Configuration & Plugins
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     { 'folke/neodev.nvim', opts = {} },
   },
-
+  event = { 'BufReadPre', 'BufNewFile' },
   config = function()
     --border lsp
     vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
@@ -169,18 +169,7 @@ return { -- LSP Configuration & Plugins
       cssls = {},
       templ = {},
       clangd = {},
-      gopls = {
-        -- settings = {
-        --   gopls = {
-        --     experimentalPostfixCompletions = true,
-        --     analyses = {
-        --       unusedparams = true,
-        --       shadow = true,
-        --     },
-        --     staticcheck = true,
-        --   },
-        -- },
-      },
+      -- gopls = {},
       pyright = {
         settings = {
           diagnostics = { disable = true },
