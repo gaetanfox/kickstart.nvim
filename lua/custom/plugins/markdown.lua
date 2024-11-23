@@ -54,6 +54,13 @@ return {
           ObsidianBlockID = { italic = true, fg = '#89ddff' },
           ObsidianHighlightText = { bg = '#75662e' },
         },
+        -- other fields ...
+
+        templates = {
+          subdir = 'stufftemp',
+          -- date_format = '%Y%m%d',
+          -- time_format = '%H:%M',
+        },
         attachments = {
           -- The default folder to place images in via `:ObsidianPasteImg`.
           -- If this is a relative path it will be interpreted as relative to the vault root.
