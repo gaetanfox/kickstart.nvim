@@ -15,8 +15,9 @@ return {
       }
     end,
     keys = {
-      { '<leader>mr', '<cmd>call org#main#runCodeBlock()<cr>' },
-      { '<leader>ml', '<cmd>call org#main#runLanguage()<cr>' },
+      { '<leader>mr', ':MdEval', { desc = 'run and eval code in md files' } },
+      { '<leader>ml', ':MdEval', { desc = 'run and eval code in md files' } },
+      -- { '<leader>ml', '<cmd>call org#main#runLanguage()<cr>' },
     },
   },
 }

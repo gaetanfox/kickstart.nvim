@@ -37,7 +37,8 @@ vim.keymap.set('n', '<M-Up>', '<c-w>5+', { desc = '[W]indow increase height' })
 
 -- obsidian
 vim.keymap.set('n', '<leader>on', ':ObsidianNew<cr>', { desc = '[O]bsidian [N]ew Note' })
-vim.keymap.set('n', '<leader>oo', ':ObsidianTOC<cr>', { desc = '[O]bsidian [O]pen TOC' })
+vim.keymap.set('n', '<leader>oo', ':Toc<cr>', { desc = '[O]bsidian [O]pen TOC' })
+vim.keymap.set('n', '<leader>oi', ':InsertNToc<cr>', { desc = '[O]bsidian [O]pen TOC' })
 vim.keymap.set('n', '<leader>os', ':ObsidianSearch<cr>', { desc = '[O]bsidian [S]earch Note' })
 vim.keymap.set('n', '<leader>ot', ':ObsidianToday<cr>', { desc = '[O]bsidian [T]oday Note' })
 vim.keymap.set('n', '<leader>or', ':ObsidianRename<cr>', { desc = '[O]bsidian [R]ename Note' })
@@ -154,3 +155,15 @@ vim.keymap.set('n', '<leader>cp', function()
     vim.cmd "echo 'Not a Python file.'" -- Notify the user if the file is not a Python file
   end
 end, { desc = '[P]YTHON, execute file' })
+
+-- Search and replace
+vim.keymap.set('n', 'ss', ':s/\\C', { desc = 'search and replace on line' })
+vim.keymap.set('n', 'SS', ':%s/\\C', { desc = 'search and replace in file' })
+
+-- search registers in insert mode
+vim.keymap.set('i', '<c-p>', function()
+  require('telescope.builtin').registers()
+end, { remap = true, silent = false, desc = 'Paste register in insert mode' })
+
+-- delete mappings
+vim.keymap.set('n', '<leader>df', ':%d_<cr>', { desc = 'delete file content to black hole register' })
