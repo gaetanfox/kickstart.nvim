@@ -157,8 +157,8 @@ vim.keymap.set('n', '<leader>cp', function()
 end, { desc = '[P]YTHON, execute file' })
 
 -- Search and replace
-vim.keymap.set('n', 'ss', ':s/\\C', { desc = 'search and replace on line' })
-vim.keymap.set('n', 'SS', ':%s/\\C', { desc = 'search and replace in file' })
+vim.keymap.set('n', '<leader>ds', ':s/\\C', { desc = 'search and replace on line' })
+vim.keymap.set('n', '<leader>dS', ':%s/\\C', { desc = 'search and replace in file' })
 
 -- search registers in insert mode
 vim.keymap.set('i', '<c-p>', function()
