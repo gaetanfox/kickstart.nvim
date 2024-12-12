@@ -45,7 +45,7 @@ return { -- Collection of various small independent pluins/modules
     --  - va)  - [V]isually select [A]round [)]paren
     --  - yinq - [Y]ank [I]nside [N]ext [']quote
     --  - ci'  - [C]hange [I]nside [']quote
-    require('mini.ai').setup { n_lines = 500 }
+    -- require('mini.ai').setup { n_lines = 500 }
 
     -- Add/delete/replace surroundings (brackets, quotes, etc.)
 
@@ -76,21 +76,21 @@ return { -- Collection of various small independent pluins/modules
     -- require('mini.sessions').setup {}
     --
     -- mini.notify
-    require('mini.notify').setup()
+    -- require('mini.notify').setup()
 
     -- mini.starter dashboard
-    local starter = require 'mini.starter'
-    starter.setup {
-      items = {
-        starter.sections.recent_files(5, true),
-      },
-      content_hooks = {
-        starter.gen_hook.adding_bullet(),
-        starter.gen_hook.aligning('center', 'center'),
-      },
-      header = header_art,
-      -- footer = footer_art,
-    }
+    -- local starter = require 'mini.starter'
+    -- starter.setup {
+    --   items = {
+    --     starter.sections.recent_files(5, true),
+    --   },
+    --   content_hooks = {
+    --     starter.gen_hook.adding_bullet(),
+    --     starter.gen_hook.aligning('center', 'center'),
+    --   },
+    --   header = header_art,
+    --   -- footer = footer_art,
+    -- }
 
     require('mini.hipatterns').setup {}
 
