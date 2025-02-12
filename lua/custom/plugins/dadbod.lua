@@ -11,8 +11,18 @@ return {
     'DBUIFindBuffer',
   },
   init = function()
-    -- Your DBUI configuration
+    -- DBUI configuration
     vim.g.db_ui_use_nerd_fonts = 1
-    vim.keymap.set('n', '<Leader>td', ':DBUIToggle<CR>', { desc = '[T]oggle [d]adbod' })
+    -- vim.g.dbs = {
+    --   dev = 'postgres://gaetanfox:gaetan070114@localhost:5432/sql_course',
+    --   -- staging = 'postgres://postgres:mypassword@localhost:5432/my-staging-db',
+    --   -- wp = 'mysql://root@localhost/wp_awesome',
+    --   -- production = function()
+    --   --   return 'postgres://production_user:secure_password@production-server:5432/production_db'
+    --   -- end,
+    -- }
+
+    -- Keybind to toggle Dadbod UI
+    vim.keymap.set('n', '<Leader>td', ':DBUIToggle<CR>', { desc = '[T]oggle [D]adbod' })
   end,
 }

@@ -53,5 +53,11 @@ return {
         require('harpoon'):list():select(5)
       end,
     },
+    {
+      '<leader>6',
+      function()
+        require('harpoon'):list():select(6)
+      end,
+    },
   },
 }
