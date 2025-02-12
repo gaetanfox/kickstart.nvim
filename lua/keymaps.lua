@@ -167,3 +167,20 @@ end, { remap = true, silent = false, desc = 'Paste register in insert mode' })
 
 -- delete mappings
 vim.keymap.set('n', '<leader>df', ':%d_<cr>', { desc = 'delete file content to black hole register' })
+-- toggle signatures
+vim.keymap.set({ 'n' }, '<C-k>', function()
+  require('lsp_signature').toggle_float_win()
+end, { silent = true, noremap = true, desc = 'toggle signature' })
+
+vim.keymap.set({ 'n' }, '<Leader>k', function()
+  vim.lsp.buf.signature_help()
+end, { silent = true, noremap = true, desc = 'toggle signature' })
+
+-- Copilot
+vim.g.copilot_no_tab_map = true
+vim.api.nvim_set_keymap('i', '<C-Space>', 'copilot#Accept("<CR>")', { silent = true, expr = true })
+vim.g.copilot_filetypes = {
+  ['*'] = true, -- Enable for all file types
+  ['markdown'] = false, -- Disable in markdown
+  -- ["lua"] = true  -- Enable in lua
+}
