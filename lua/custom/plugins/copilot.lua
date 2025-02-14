@@ -1,4 +1,4 @@
 return {
   -- Other plugins...
-  -- { 'github/copilot.vim' },
+  { 'github/copilot.vim' },
 }

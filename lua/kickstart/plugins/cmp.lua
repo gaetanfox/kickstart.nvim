@@ -21,7 +21,7 @@ return { -- Autocompletion
     -- Snippet Engine & its associated nvim-cmp source
     {
       'L3MON4D3/LuaSnip',
-      build = (function()
+      build = function()
         -- Build Step is needed for regex support in snippets.
         -- This step is not supported in many windows environments.
         -- Remove the below condition to re-enable on windows.
@@ -29,11 +29,11 @@ return { -- Autocompletion
           return
         end
         return 'make install_jsregexp'
-      end)(),
+      end,
       dependencies = {
         -- `friendly-snippets` contains a variety of premade snippets.
-        --    See the README about individual language/framework/plugin snippets:
-        --    https://github.com/rafamadriz/friendly-snippets
+        -- See the README about individual language/framework/plugin snippets:
+        -- https://github.com/rafamadriz/friendly-snippets
         {
           'rafamadriz/friendly-snippets',
           config = function()
@@ -45,16 +45,19 @@ return { -- Autocompletion
     'saadparwaiz1/cmp_luasnip',
 
     -- Adds other completion capabilities.
-    --  nvim-cmp does not ship with all sources by default. They are split
-    --  into multiple repos for maintenance purposes.
+    -- nvim-cmp does not ship with all sources by default. They are split
+    -- into multiple repos for maintenance purposes.
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-path',
+    'hrsh7th/cmp-cmdline', -- Add this for command line completion
+    'hrsh7th/cmp-buffer', -- Add this for buffer completion
   },
   config = function()
     -- See `:help cmp`
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
     luasnip.config.setup {}
+    local lspkind = require 'lspkind' -- Require lspkind
 
     cmp.setup {
       window = {
@@ -69,6 +72,13 @@ return { -- Autocompletion
       },
       preselect = cmp.PreselectMode.None,
       completion = { completeopt = 'menu,menuone,noinsert' },
+      formatting = {
+        format = lspkind.cmp_format {
+          mode = 'symbol',
+          max_width = 50,
+          symbol_map = { Copilot = '' },
+        },
+      },
 
       -- For an understanding of why these mappings were
       -- chosen, you will need to read `:help ins-completion`
@@ -85,8 +95,8 @@ return { -- Autocompletion
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
 
         -- Accept ([y]es) the completion.
-        --  This will auto-import if your LSP supports it.
-        --  This will expand snippets if the LSP sent a snippet.
+        -- This will auto-import if your LSP supports it.
+        -- This will expand snippets if the LSP sent a snippet.
         ['<C-y>'] = cmp.mapping.confirm { select = true },
 
         -- If you prefer more traditional completion keymaps,
@@ -97,15 +107,15 @@ return { -- Autocompletion
         ['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
         -- Manually trigger a completion from nvim-cmp.
-        --  Generally you don't need this, because nvim-cmp will display
-        --  completions whenever it has completion options available.
+        -- Generally you don't need this, because nvim-cmp will display
+        -- completions whenever it has completion options available.
         ['<C-Space>'] = cmp.mapping.complete {},
 
         -- Think of <c-l> as moving to the right of your snippet expansion.
-        --  So if you have a snippet that's like:
-        --  function $name($args)
-        --    $body
-        --  end
+        -- So if you have a snippet that's like:
+        -- function $name($args)
+        --   $body
+        -- end
         --
         -- <c-l> will move you to the right of each of the expansion locations.
         -- <c-h> is similar, except moving you backwards.
@@ -121,14 +131,16 @@ return { -- Autocompletion
         end, { 'i', 's' }),
 
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-        --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
+        --   https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
       },
       sources = {
         { name = 'nvim_lsp_signature_help' },
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
         { name = 'path' },
-        -- { name = 'copilot' },
+        { name = 'copilot' },
+        { name = 'buffer' }, -- Add buffer source
+        { name = 'cmdline' }, -- Add cmdline source
       },
     }
   end,
