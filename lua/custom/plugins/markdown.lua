@@ -16,6 +16,15 @@ return {
           path = '~/Documents/main',
         },
       },
+      notes_subdir = 'inbox',
+      new_notes_location = 'notes_subdir',
+
+      disable_frontmatter = true,
+      templates = {
+        subdir = 'templates',
+        date_format = '%Y-%m-%d',
+        time_format = '%H:%M:%S',
+      },
       ui = {
         enable = false,
         checkboxes = {
@@ -56,16 +65,11 @@ return {
         },
         -- other fields ...
 
-        templates = {
-          subdir = 'stufftemp',
-          -- date_format = '%Y%m%d',
-          -- time_format = '%H:%M',
-        },
         attachments = {
           -- The default folder to place images in via `:ObsidianPasteImg`.
           -- If this is a relative path it will be interpreted as relative to the vault root.
           -- You can always override this per image by passing a full path to the command instead of just a filename.
-          img_folder = '~/Documents/main/600 Resources', -- This is the default
+          img_folder = '~/Documents/main/99 - Meta/Images/', -- This is the default
 
           -- Optional, customize the default name or prefix when pasting images via `:ObsidianPasteImg`.
           ---@return string
