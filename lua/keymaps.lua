@@ -184,3 +184,19 @@ vim.g.copilot_filetypes = {
   ['markdown'] = false, -- Disable in markdown
   -- ["lua"] = true  -- Enable in lua
 }
+
+-- vimwiki
+-- configure custom vimwiki mappings globally
+vim.keymap.set('n', '<Leader>oww', ':VimwikiIndex<CR>', { desc = '[W]iki [W]iki' })
+vim.keymap.set('n', '<Leader>owi', ':VimwikiIndex<CR>', { desc = '[W]iki [I]ndex' })
+vim.keymap.set('n', '<Leader>owl', ':VimwikiFollowLink<CR>', { desc = '[W]iki [L]ink' })
+
+-- vim.keymap.set('n', '<Leader>owl', ':VimwikiMakeLink<CR>', { desc = '[W]iki [L]ink' })
+
+vim.keymap.set('n', '<CR>', ':VimwikiFollowLink<CR>', { desc = '[W]iki Follow [L]ink' })
+vim.keymap.set('n', '<Leader>owh', ':VimwikiBackLink<CR>', { desc = '[W]iki [B]ack' })
+vim.keymap.set('n', '<Leader>owt', ':VimwikiToggleListItem<CR>', { desc = '[W]iki [T]oggle List Item' })
+vim.keymap.set('n', '<Leader>owdi', ':VimwikiDiaryIndex<CR>', { desc = '[W]iki [D]iary [I]ndex' })
+vim.keymap.set('n', '<Leader>owd', ':VimwikiMakeDiaryNote<CR>', { desc = '[W]iki [D]iary [N]ew Day' })
+-- Map Ctrl+Space to toggle the checkbox in normal mode
+vim.keymap.set('n', '<C-Space>', ':VimwikiToggleListItem', { desc = 'Toggle Vimwiki Checkbox' })
