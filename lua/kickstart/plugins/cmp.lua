@@ -1,7 +1,13 @@
+-- lua/kickstart/plugins/cmp.lua (or wherever this file is)
+
 return { -- Autocompletion
   'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
   dependencies = {
+    -- Make sure lspconfig is listed as a dependency HERE
+    'neovim/nvim-lspconfig', -- <<< ADD THIS LINE
+
+    -- Other dependencies remain...
     {
       'zbirenbaum/copilot.lua',
       config = function()
@@ -18,22 +24,15 @@ return { -- Autocompletion
         require('copilot_cmp').setup()
       end,
     },
-    -- Snippet Engine & its associated nvim-cmp source
     {
       'L3MON4D3/LuaSnip',
       build = function()
-        -- Build Step is needed for regex support in snippets.
-        -- This step is not supported in many windows environments.
-        -- Remove the below condition to re-enable on windows.
         if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
           return
         end
         return 'make install_jsregexp'
       end,
       dependencies = {
-        -- `friendly-snippets` contains a variety of premade snippets.
-        -- See the README about individual language/framework/plugin snippets:
-        -- https://github.com/rafamadriz/friendly-snippets
         {
           'rafamadriz/friendly-snippets',
           config = function()
@@ -43,82 +42,42 @@ return { -- Autocompletion
       },
     },
     'saadparwaiz1/cmp_luasnip',
-
-    -- Adds other completion capabilities.
-    -- nvim-cmp does not ship with all sources by default. They are split
-    -- into multiple repos for maintenance purposes.
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-path',
-    'hrsh7th/cmp-cmdline', -- Add this for command line completion
-    'hrsh7th/cmp-buffer', -- Add this for buffer completion
+    'hrsh7th/cmp-cmdline',
+    'hrsh7th/cmp-buffer',
+    'habamax/vim-godot', -- Still consider if this is needed alongside LSP
+    'onsails/lspkind.nvim',
   },
   config = function()
-    -- See `:help cmp`
+    -- See :help cmp
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
     luasnip.config.setup {}
-    local lspkind = require 'lspkind' -- Require lspkind
+    local lspkind = require 'lspkind'
+    -- No need to require lspconfig here IF it's just for the setup call later
 
     cmp.setup {
-      window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
-      },
-
+      -- ... (rest of your cmp.setup remains the same) ...
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
         end,
       },
-      preselect = cmp.PreselectMode.None,
-      completion = { completeopt = 'menu,menuone,noinsert' },
-      formatting = {
-        format = lspkind.cmp_format {
-          mode = 'symbol',
-          max_width = 50,
-          symbol_map = { Copilot = '' },
-        },
+      window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
       },
-
-      -- For an understanding of why these mappings were
-      -- chosen, you will need to read `:help ins-completion`
-      --
-      -- No, but seriously. Please read `:help ins-completion`, it is really good!
       mapping = cmp.mapping.preset.insert {
-        -- Select the [n]ext item
         ['<C-n>'] = cmp.mapping.select_next_item(),
-        -- Select the [p]revious item
         ['<C-p>'] = cmp.mapping.select_prev_item(),
-
-        -- Scroll the documentation window [b]ack / [f]orward
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
-
-        -- Accept ([y]es) the completion.
-        -- This will auto-import if your LSP supports it.
-        -- This will expand snippets if the LSP sent a snippet.
         ['<C-y>'] = cmp.mapping.confirm { select = true },
-
-        -- If you prefer more traditional completion keymaps,
-        -- you can uncomment the following lines
-        -- WARNING: testing
         ['<CR>'] = cmp.mapping.confirm { select = true },
         ['<Tab>'] = cmp.mapping.select_next_item(),
         ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-
-        -- Manually trigger a completion from nvim-cmp.
-        -- Generally you don't need this, because nvim-cmp will display
-        -- completions whenever it has completion options available.
         ['<C-Space>'] = cmp.mapping.complete {},
-
-        -- Think of <c-l> as moving to the right of your snippet expansion.
-        -- So if you have a snippet that's like:
-        -- function $name($args)
-        --   $body
-        -- end
-        --
-        -- <c-l> will move you to the right of each of the expansion locations.
-        -- <c-h> is similar, except moving you backwards.
         ['<C-l>'] = cmp.mapping(function()
           if luasnip.expand_or_locally_jumpable() then
             luasnip.expand_or_jump()
@@ -129,19 +88,61 @@ return { -- Autocompletion
             luasnip.jump(-1)
           end
         end, { 'i', 's' }),
-
-        -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-        --   https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
       },
-      sources = {
-        { name = 'nvim_lsp_signature_help' },
+      formatting = {
+        format = lspkind.cmp_format {
+          mode = 'symbol_text',
+          maxwidth = 50,
+          ellipsis_char = '...',
+          symbol_map = { Copilot = '' },
+        },
+      },
+      sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-        { name = 'path' },
         { name = 'copilot' },
-        { name = 'buffer' }, -- Add buffer source
-        { name = 'cmdline' }, -- Add cmdline source
+        { name = 'luasnip' },
+        { name = 'godot' },
+        { name = 'path' },
+      }, {
+        { name = 'buffer', keyword_length = 5 },
+        { name = 'cmdline' },
+      }),
+      preselect = cmp.PreselectMode.None,
+      completion = {
+        completeopt = 'menu,menuone,noinsert',
       },
-    }
+      experimental = {
+        -- ghost_text = true,
+      },
+    } -- End of cmp.setup
+
+    -- Conditional Godot LSP setup
+    local function check_is_godot_project()
+      local project_file = vim.fn.findfile('project.godot', '.;')
+      return project_file and project_file ~= ''
+    end
+
+    local is_godot_project = check_is_godot_project()
+    if is_godot_project then
+      -- Now that nvim-lspconfig is guaranteed to be loaded (due to dependency),
+      -- this pcall should find the 'godot' config.
+      pcall(function()
+        local lspconfig = require 'lspconfig' -- Require it inside the pcall scope
+        if lspconfig.godot then
+          lspconfig.godot.setup {
+            on_attach = function(_, bufnr)
+              vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+              local opts = { noremap = true, silent = true, buffer = bufnr }
+              vim.keymap.set('n', '<C-CR>', vim.lsp.buf.signature_help, opts)
+              -- Add other LSP keymaps here if needed
+            end,
+          }
+          print 'Godot LSP setup attempted.' -- Changed message slightly
+        else
+          -- This branch shouldn't be hit if lspconfig loaded correctly
+          print '[Error] lspconfig.godot still not found after declaring dependency.'
+        end
+      end)
+    end
   end,
 }
